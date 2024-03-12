@@ -25,7 +25,7 @@
           #     })
           #   ];
           # })
-          ./nixos/configuration.nix
+          ./hosts/mars/configuration.nix
           nixos-hardware.nixosModules.common-cpu-intel
         ];
       };
