@@ -29,6 +29,25 @@
           nixos-hardware.nixosModules.common-cpu-intel
         ];
       };
+
+      jupiter = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          # ({ pkgs, ... }: {
+          #   nixpkgs.overlays = [
+          #     (self: super: {
+          #       unstable = import nixpkgs-unstable {
+          #         system = super.system;
+          #         config = super.config;
+          #       };
+          #     })
+          #   ];
+          # })
+          ./hosts/jupiter/configuration.nix
+          # nixos-hardware.nixosModules.common-cpu-intel
+        ];
+      };
     };
 
     # homeConfigurations = {
