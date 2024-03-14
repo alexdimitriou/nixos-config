@@ -15,7 +15,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Latest kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_7;
 
   networking.hostName = "jupiter"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -51,12 +51,56 @@
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma6.enable = true;
+  services.xserver.displayManager.defaultSession = "plasmax11";
+
+  # Enable the GNOME Desktop Environment
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
+
+  # Exclude Gnome packages
+  # environment.gnome.excludePackages = (with pkgs; [
+  #   gnome-photos
+  #   gnome-tour
+  #   gedit
+  # ]) ++ (with pkgs.gnome; [
+  #   cheese # webcam tool
+  #   gnome-music
+  #   gnome-terminal
+  #   epiphany # web browser
+  #   geary # email reader
+  #   evince # document viewer
+  #   gnome-characters
+  #   totem # video player
+  #   tali # poker game
+  #   iagno # go game
+  #   hitori # sudoku game
+  #   atomix # puzzle game
+  # ]);
+
+  services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
+   [org.gnome.mutter]
+   experimental-features = [ "scale-monitor-framebuffer" ]
+  '';
 
   services.xserver.videoDrivers = ["nvidia"];
 
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
   hardware.nvidia = {
+    modesetting.enable = true;
+
+    powerManagement.enable = false;
+    # powerManagement.finegrained = false;
+    open = false;
+    nvidiaSettings = true;
+
+    # forceFullCompositionPipeline = true;
+
     package = config.boot.kernelPackages.nvidiaPackages.stable;
-  
   };
 
   # Configure keymap in X11
@@ -96,6 +140,9 @@
     packages = with pkgs; [
       google-chrome
       vscode
+      steam
+      firefox
+      via
     ];
   };
 
@@ -106,6 +153,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     git
+    gamescope
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
