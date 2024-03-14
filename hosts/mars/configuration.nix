@@ -37,7 +37,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   #boot.kernelParams = [ "i915.modeset=1" "i915.enable_rc6=0" ];
   
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "mars"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -118,6 +118,19 @@
     variant = "";
   };
 
+  # Add keyd configuration to disable wlan toggle when attaching
+  # detaching keyboard
+  # TODO: find a way to catch keyboard (now they are ignored)
+  # environment.etc."keyd/default.conf".text = ''
+  #   [ids]
+
+  #   *
+    
+  #   [keycodes]
+  #   # Disable keycode 246
+  #   wlan = noop
+  # '';
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -190,14 +203,15 @@
     #gsettings-desktop-schemas
     git
     gnumake
-    gnome.dconf-editor
+    # gnome.dconf-editor
     vscode
-    gnome.gnome-tweaks
+    # gnome.gnome-tweaks
     distrobox
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     obsidian
     warp-terminal
+    # keyd
   ];
 
   # Add docker
