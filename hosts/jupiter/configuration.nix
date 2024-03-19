@@ -49,33 +49,33 @@
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma6.enable = true;
-  services.xserver.displayManager.defaultSession = "plasmax11";
+  # services.xserver.displayManager.sddm.enable = true;
+  # services.xserver.desktopManager.plasma6.enable = true;
+  # services.xserver.displayManager.defaultSession = "plasmax11";
 
   # Enable the GNOME Desktop Environment
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
   # Exclude Gnome packages
-  # environment.gnome.excludePackages = (with pkgs; [
-  #   gnome-photos
-  #   gnome-tour
-  #   gedit
-  # ]) ++ (with pkgs.gnome; [
-  #   cheese # webcam tool
-  #   gnome-music
-  #   gnome-terminal
-  #   epiphany # web browser
-  #   geary # email reader
-  #   evince # document viewer
-  #   gnome-characters
-  #   totem # video player
-  #   tali # poker game
-  #   iagno # go game
-  #   hitori # sudoku game
-  #   atomix # puzzle game
-  # ]);
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-photos
+    gnome-tour
+    gedit
+  ]) ++ (with pkgs.gnome; [
+    cheese # webcam tool
+    gnome-music
+    gnome-terminal
+    epiphany # web browser
+    geary # email reader
+    evince # document viewer
+    gnome-characters
+    totem # video player
+    tali # poker game
+    iagno # go game
+    hitori # sudoku game
+    atomix # puzzle game
+  ]);
 
   services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
    [org.gnome.mutter]
@@ -83,6 +83,10 @@
   '';
 
   services.xserver.videoDrivers = ["nvidia"];
+
+  environment.variables = {
+   MUTTER_DEBUG_FORCE_EGL_STREAM="1";
+  };
 
   hardware.opengl = {
     enable = true;
@@ -141,8 +145,9 @@
       google-chrome
       vscode
       steam
-      firefox
-      via
+      woeusb-ng
+      stremio
+      lutris
     ];
   };
 
@@ -154,6 +159,7 @@
   environment.systemPackages = with pkgs; [
     git
     gamescope
+    gnome.gnome-tweaks
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
