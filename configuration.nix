@@ -11,13 +11,11 @@
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.useOSProber = true;
 
-  # Latest kernel
-  boot.kernelPackages = pkgs.linuxPackages_6_7;
-
-  networking.hostName = "jupiter"; # Define your hostname.
+  networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -48,64 +46,9 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
-  # services.xserver.displayManager.sddm.enable = true;
-  # services.xserver.desktopManager.plasma6.enable = true;
-  # services.xserver.displayManager.defaultSession = "plasmax11";
-
-  # Enable the GNOME Desktop Environment
+  # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-
-  # Exclude Gnome packages
-  environment.gnome.excludePackages = (with pkgs; [
-    gnome-photos
-    gnome-tour
-    gedit
-  ]) ++ (with pkgs.gnome; [
-    cheese # webcam tool
-    gnome-music
-    gnome-terminal
-    epiphany # web browser
-    geary # email reader
-    evince # document viewer
-    gnome-characters
-    totem # video player
-    tali # poker game
-    iagno # go game
-    hitori # sudoku game
-    atomix # puzzle game
-  ]);
-
-  services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
-   [org.gnome.mutter]
-   experimental-features = [ "scale-monitor-framebuffer" ]
-  '';
-
-  services.xserver.videoDrivers = ["nvidia"];
-
-  environment.variables = {
-   MUTTER_DEBUG_FORCE_EGL_STREAM="1";
-  };
-
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-
-    powerManagement.enable = false;
-    # powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = true;
-
-    # forceFullCompositionPipeline = true;
-
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -117,7 +60,6 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -142,14 +84,12 @@
     description = "Alexandros Dimitriou";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      google-chrome
-      vscode
-      steam
-      woeusb-ng
-      stremio
-      lutris
+    #  thunderbird
     ];
   };
+
+  # Install firefox.
+  programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -157,9 +97,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    git
-    gamescope
-    gnome.gnome-tweaks
+  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+     wget
+     git
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -187,6 +127,9 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
+
+  # Enable flakes
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
 }
