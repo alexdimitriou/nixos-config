@@ -136,22 +136,14 @@
     packages = with pkgs; [
       # Standard fonts
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
       liberation_ttf
       fira-code
       fira-code-symbols
-      jetbrains-mono
       
       # Nerd Fonts for terminal and development
-      (nerdfonts.override { fonts = [ 
-        "JetBrainsMono" 
-        "FiraCode" 
-        "Hack" 
-        "SourceCodePro" 
-        "UbuntuMono"
-        "CascadiaCode"
-      ]; })
+      nerd-fonts.fira-code
     ];
     
     # Enable font directory for user fonts
@@ -162,7 +154,7 @@
       defaultFonts = {
         serif = [ "Noto Serif" ];
         sansSerif = [ "Noto Sans" ];
-        monospace = [ "JetBrainsMono Nerd Font" "JetBrains Mono" ];
+        monospace = [ "FiraCode Nerd Font" "Fira Code" ];
         emoji = [ "Noto Color Emoji" ];
       };
     };

@@ -13,18 +13,10 @@
     nil  # Nix language server
 
     # Fonts for development
-    jetbrains-mono
     fira-code
     
     # Nerd Fonts (patched fonts with icons and glyphs)
-    (nerdfonts.override { fonts = [ 
-      "JetBrainsMono" 
-      "FiraCode" 
-      "Hack" 
-      "SourceCodePro" 
-      "UbuntuMono"
-      "CascadiaCode"
-    ]; })
+    nerd-fonts.fira-code
 
     # Compression tools
     zip

@@ -34,7 +34,7 @@
       userSettings = {
         # Editor settings
         "editor.fontSize" = 14;
-        "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'FiraCode Nerd Font', 'JetBrains Mono', 'Fira Code', monospace";
+        "editor.fontFamily" = "'FiraCode Nerd Font', 'Fira Code', monospace";
         "editor.fontLigatures" = true;
         "editor.tabSize" = 2;
         "editor.insertSpaces" = true;
@@ -53,7 +53,7 @@
 
         # Terminal settings
         "terminal.integrated.fontSize" = 14;
-        "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font', 'JetBrains Mono', monospace";
+        "terminal.integrated.fontFamily" = "'FiraCode Nerd Font', 'Fira Code', monospace";
 
         # File settings
         "files.autoSave" = "afterDelay";
