@@ -3,7 +3,7 @@
 {
   programs.vscode = {
     enable = true;
-    
+
     profiles.default = {
       # Extensions to install
       extensions = with pkgs.vscode-extensions; [
@@ -12,19 +12,19 @@
         ms-vscode.cpptools
         rust-lang.rust-analyzer
         golang.go
-        
+
         # Git integration
         eamodio.gitlens
-        
+
         # Themes and UI
         dracula-theme.theme-dracula
         pkief.material-icon-theme
-        
+
         # Productivity
         ms-vscode-remote.remote-ssh
            # Formatters and linters
       esbenp.prettier-vscode
-      
+
       # Nix language support
       jnoortheen.nix-ide
       bbenoist.nix
@@ -70,7 +70,7 @@
         "python.defaultInterpreterPath" = "${pkgs.python3}/bin/python";
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "${pkgs.nil}/bin/nil";
-        
+
         # Telemetry
         "telemetry.telemetryLevel" = "off";
       };
