@@ -77,18 +77,11 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.alexdimi = {
-    isNormalUser = true;
-    description = "Alexandros Dimitriou";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
-  };
-
   # Install firefox.
   programs.firefox.enable = true;
+
+  # Enable zsh system-wide
+  programs.zsh.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -99,7 +92,19 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      wget
      git
+     kitty  # Terminal emulator
   ];
+
+  # Set default terminal for GNOME
+  environment.sessionVariables = {
+    TERMINAL = "kitty";
+  };
+
+  # Configure GNOME settings
+  services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
+    [org.gnome.desktop.default-applications.terminal]
+    exec='kitty'
+  '';
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -158,6 +163,17 @@
         emoji = [ "Noto Color Emoji" ];
       };
     };
+  };
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.alexdimi = {
+    isNormalUser = true;
+    description = "Alexandros Dimitriou";
+    extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
+    packages = with pkgs; [
+    #  thunderbird
+    ];
   };
 
 }

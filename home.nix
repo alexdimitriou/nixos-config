@@ -6,6 +6,8 @@
     ./modules/programs/vscode.nix
     ./modules/programs/git.nix
     ./modules/programs/bash.nix
+    ./modules/programs/zsh.nix
+    ./modules/programs/kitty.nix
     ./modules/programs/neovim-minimal.nix
     ./modules/packages.nix
   ];
