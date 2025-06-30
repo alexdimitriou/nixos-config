@@ -22,18 +22,13 @@
         
         # Productivity
         ms-vscode-remote.remote-ssh
-        
-        # Formatters and linters
-        esbenp.prettier-vscode
-      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        # Add extensions from marketplace that aren't in nixpkgs
-        {
-          name = "nix-ide";
-          publisher = "jnoortheen";
-          version = "0.3.1";
-          sha256 = "1cpfckh6zg8byi6x1llkdls24w9b0fvxx4qybi9zfcy5gc60l7n0";
-        }
-      ];
+           # Formatters and linters
+      esbenp.prettier-vscode
+      
+      # Nix language support
+      jnoortheen.nix-ide
+      bbenoist.nix
+    ];
 
       # User settings
       userSettings = {
