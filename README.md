@@ -10,14 +10,20 @@ nixos-config/
 ├── flake.lock                   # Flake lock file
 ├── home.nix                     # Home Manager entry point
 ├── hosts/                       # Host-specific configurations
-│   ├── lexbookduo.nix          # Main system configuration
-│   └── hardware-configuration.nix # Hardware-specific settings
+│   ├── lexbookduo/             # Host: lexbookduo
+│   │   ├── lexbookduo.nix      # Main system configuration
+│   │   └── hardware-configuration.nix # Hardware-specific settings
+│   └── template/               # Template for new hosts
+│       ├── README.md
+│       ├── template.nix
+│       └── hardware-configuration.nix
 ├── modules/                     # Modular configurations
 │   ├── packages.nix            # System-wide packages
 │   ├── programs/               # Program-specific configurations
 │   │   ├── vscode.nix         # VS Code configuration
 │   │   ├── git.nix            # Git configuration
-│   │   └── bash.nix           # Bash shell configuration
+│   │   ├── bash.nix           # Bash shell configuration
+│   │   └── template.nix       # Template for new programs
 │   └── services/              # Service configurations (future)
 ├── secrets/                    # Encrypted secrets (if using)
 └── README-vscode.md           # VS Code specific documentation
@@ -36,8 +42,10 @@ nixos-config/
 - Fonts and themes
 
 ### Hosts (`hosts/`)
-- **`lexbookduo.nix`** - System-level configuration (networking, services, etc.)
-- **`hardware-configuration.nix`** - Hardware-specific settings
+- **`lexbookduo/`** - Complete host configuration directory
+  - **`lexbookduo.nix`** - System-level configuration (networking, services, etc.)
+  - **`hardware-configuration.nix`** - Hardware-specific settings
+- **`template/`** - Template for creating new host configurations
 
 ## Benefits of This Structure
 
@@ -55,9 +63,10 @@ nixos-config/
 3. Rebuild: `sudo nixos-rebuild switch --flake .#lexbookduo`
 
 ### Adding a New Host
-1. Create a new configuration in `hosts/`
-2. Add it to `flake.nix` outputs
-3. Reference it when rebuilding
+1. Copy the template: `cp -r hosts/template hosts/new-hostname`
+2. Update the configuration files in the new directory
+3. Add the host to `flake.nix` outputs
+4. Rebuild: `sudo nixos-rebuild switch --flake .#new-hostname`
 
 ### Quick Commands
 From the configuration directory:
@@ -71,7 +80,7 @@ From the configuration directory:
 |----------------|---------|
 | `flake.nix` | Entry point, defines inputs/outputs |
 | `home.nix` | Home Manager configuration aggregator |
-| `hosts/` | System-level configurations |
+| `hosts/hostname/` | Host-specific configuration directory |
 | `modules/programs/` | User program configurations |
 | `modules/services/` | Service configurations |
 | `modules/packages.nix` | Package installations |
