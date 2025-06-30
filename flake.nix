@@ -19,7 +19,7 @@
     nixosConfigurations.lexbookduo = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./configuration.nix
+        ./hosts/lexbookduo.nix
 
         home-manager.nixosModules.home-manager
 	{
