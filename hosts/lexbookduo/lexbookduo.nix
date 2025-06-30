@@ -131,4 +131,41 @@
   # Enable flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+  # Font configuration
+  fonts = {
+    packages = with pkgs; [
+      # Standard fonts
+      noto-fonts
+      noto-fonts-cjk
+      noto-fonts-emoji
+      liberation_ttf
+      fira-code
+      fira-code-symbols
+      jetbrains-mono
+      
+      # Nerd Fonts for terminal and development
+      (nerdfonts.override { fonts = [ 
+        "JetBrainsMono" 
+        "FiraCode" 
+        "Hack" 
+        "SourceCodePro" 
+        "UbuntuMono"
+        "CascadiaCode"
+      ]; })
+    ];
+    
+    # Enable font directory for user fonts
+    fontDir.enable = true;
+    
+    # Default fonts
+    fontconfig = {
+      defaultFonts = {
+        serif = [ "Noto Serif" ];
+        sansSerif = [ "Noto Sans" ];
+        monospace = [ "JetBrainsMono Nerd Font" "JetBrains Mono" ];
+        emoji = [ "Noto Color Emoji" ];
+      };
+    };
+  };
+
 }

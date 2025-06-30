@@ -15,6 +15,16 @@
     # Fonts for development
     jetbrains-mono
     fira-code
+    
+    # Nerd Fonts (patched fonts with icons and glyphs)
+    (nerdfonts.override { fonts = [ 
+      "JetBrainsMono" 
+      "FiraCode" 
+      "Hack" 
+      "SourceCodePro" 
+      "UbuntuMono"
+      "CascadiaCode"
+    ]; })
 
     # Compression tools
     zip
