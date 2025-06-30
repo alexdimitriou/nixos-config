@@ -71,6 +71,15 @@
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "${pkgs.nil}/bin/nil";
 
+        # Disable nil formatter and use Prettier instead
+        "nil.formatting.command" = null;
+
+        # Configure Prettier for Nix files
+        "[nix]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+          "editor.formatOnSave" = true;
+        };
+
         # Telemetry
         "telemetry.telemetryLevel" = "off";
       };
