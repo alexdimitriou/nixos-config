@@ -93,7 +93,7 @@
     };
     
     # Additional zsh configuration
-    initExtra = ''
+    initContent = ''
       # Better history search
       bindkey '^R' history-incremental-search-backward
       bindkey '^S' history-incremental-search-forward
