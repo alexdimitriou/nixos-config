@@ -1,20 +1,14 @@
 { pkgs, ... }:
 
 let
-  claude-code = pkgs.writeShellScriptBin "claude-code" ''
+  # Use npm to run the official @anthropic-ai/claude-code package with auto-yes
+  claude-code-wrapper = pkgs.writeShellScriptBin "claude-code" ''
     #!/bin/sh
-    # Check if claude-code is installed globally
-    if ! command -v claude-code > /dev/null 2>&1; then
-      echo "Installing claude-code globally..."
-      ${pkgs.nodePackages.npm}/bin/npm install -g claude-code
-      echo "claude-code installed successfully!"
-    fi
-
-    # Run claude-code with all passed arguments
-    exec ${pkgs.nodejs}/bin/node "$(${pkgs.nodePackages.npm}/bin/npm root -g)/claude-code/bin/claude-code" "$@"
+    # Use --yes flag to automatically install the package if needed
+    exec ${pkgs.nodePackages.npm}/bin/npx --yes @anthropic-ai/claude-code "$@"
   '';
 in
 
 {
-  home.packages = [ claude-code ];
+  home.packages = [ claude-code-wrapper ];
 }
