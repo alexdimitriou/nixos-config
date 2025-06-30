@@ -14,7 +14,7 @@
 
     # Fonts for development
     fira-code
-    
+
     # Nerd Fonts (patched fonts with icons and glyphs)
     nerd-fonts.fira-code
 

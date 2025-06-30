@@ -141,14 +141,14 @@
       liberation_ttf
       fira-code
       fira-code-symbols
-      
+
       # Nerd Fonts for terminal and development
       nerd-fonts.fira-code
     ];
-    
+
     # Enable font directory for user fonts
     fontDir.enable = true;
-    
+
     # Default fonts
     fontconfig = {
       defaultFonts = {
