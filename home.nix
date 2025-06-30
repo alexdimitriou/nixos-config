@@ -9,6 +9,7 @@
     ./modules/programs/zsh.nix
     ./modules/programs/kitty.nix
     ./modules/programs/neovim-minimal.nix
+    ./modules/programs/claude-code.nix
     ./modules/packages.nix
   ];
 

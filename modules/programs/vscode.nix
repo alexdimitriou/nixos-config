@@ -32,6 +32,9 @@
 
       # User settings
       userSettings = {
+        # To add new settings, add them here and then rebuild your NixOS configuration
+        # Example: "editor.newSetting" = "value";
+
         # Editor settings
         "editor.fontSize" = 14;
         "editor.fontFamily" = "'FiraCode Nerd Font', 'Fira Code', monospace";
