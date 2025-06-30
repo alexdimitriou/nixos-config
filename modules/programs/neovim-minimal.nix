@@ -15,11 +15,11 @@
       curl
       unzip
       gcc
-      
+
       # Language servers
       lua-language-server
       nil # Nix language server
-      
+
       # Tools
       ripgrep
       fd
@@ -33,7 +33,7 @@
       vim.opt.mouse = "a"
       vim.opt.clipboard = "unnamedplus"
       vim.g.mapleader = " "
-      
+
       -- Bootstrap lazy.nvim
       local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
       if not vim.loop.fs_stat(lazypath) then
