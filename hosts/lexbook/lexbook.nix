@@ -47,6 +47,7 @@
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;
   services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
@@ -98,10 +99,19 @@
   # Set default terminal for GNOME
   environment.sessionVariables = {
     TERMINAL = "kitty";
+    # Enable Wayland support for Electron applications (VS Code, etc.)
+    NIXOS_OZONE_WL = "1";
+    # Additional Wayland environment variables
+    MOZ_ENABLE_WAYLAND = "1";
+    QT_QPA_PLATFORM = "wayland";
+    GDK_BACKEND = "wayland";
   };
 
-  # Configure GNOME settings
+  # Configure GNOME settings with fractional scaling support and wallpaper
   services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
+    [org.gnome.mutter]
+    experimental-features=['scale-monitor-framebuffer']
+
     [org.gnome.desktop.default-applications.terminal]
     exec='kitty'
   '';
@@ -171,7 +181,7 @@
     description = "Alexandros Dimitriou";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [
+    packages = [
     #  thunderbird
     ];
   };
